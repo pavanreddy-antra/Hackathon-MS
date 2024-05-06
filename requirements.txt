@@ -1,0 +1,12 @@
+aiofiles
+Flask
+google_cloud_aiplatform
+numpy
+pandas
+protobuf
+python-dotenv
+Requests
+setuptools
+setuptools
+streamlit
+streamlit-webrtc
