@@ -9,4 +9,13 @@ Requests
 setuptools
 setuptools
 streamlit
-streamlit-webrtc
+google-auth
+google-cloud-storage
+google-cloud-speech
+openai
+google-generativeai==0.3.1
+azure-batch
+azure-ai-ml
+azure-ai-textanalytics
+azure-search-documents
+azure-search
