@@ -25,13 +25,17 @@ class Server:
             st.session_state.history = []
         if 'state' not in st.session_state:
             st.session_state.state = "started"
-        if 'reset_input' not in st.session_state:
-            st.session_state.reset_input = False
+        if 'copy_to_input' not in st.session_state:
+            st.session_state.copy_to_input = False
 
-        col1, col2 = st.columns([8, 2])
+        col1, col2, col3 = st.columns([8, 1, 1])
 
         with col1:
-            user_question = st.text_input("Type your question and press enter:", value=st.session_state.transcription)
+            user_question = st.text_input(
+                "Type your question and press enter:",
+                value=st.session_state.transcription if st.session_state.copy_to_input else "",
+                key="question"
+            )
 
         with col2:
             audio = audiorecorder("Click to record", "Click to stop recording")
@@ -41,6 +45,13 @@ class Server:
 
                 text = self.csp.stt_client.get_text("audio.wav")
                 st.session_state.transcription = text
+                st.session_state.copy_to_input = True
+
+        with col3:
+            if st.button("Copy Transcription to Input"):
+                st.session_state.copy_to_input = False  # Reset the flag after copying
+                st.session_state.transcription = user_question
+
 
 
         if st.button("Send"):
